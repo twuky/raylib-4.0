@@ -1,4 +1,4 @@
-var raylib = require('./build/Release/raylib-4.0-native');
+var raylib = require('./build/Release/raylib-4.0');
 
 // UpdateCamera works with a camera pointer, so a wrapped function is made
 // that returns the object once modified

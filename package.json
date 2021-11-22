@@ -9,7 +9,7 @@
     "scripts": {
         "build": "ts-node src/generate.ts",
         "install": "cmake-js compile",
-        "test": "npm install && node --napi-modules ./test/test_binding.js"
+        "test": "node --napi-modules ./test/test_binding.js"
     },
     "dependencies": {
         "cmake-js": "^6.2.1",

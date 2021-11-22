@@ -1,0 +1,21 @@
+{
+    "name": "raylib-4.0",
+    "version": "0.5.0",
+    "author": "tuckie",
+    "license": "ISC",
+    "description": "NodeJS Bindings for the raylib graphics library.",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "scripts": {
+        "build": "ts-node src/generate.ts",
+        "test": "npm install && node --napi-modules ./test/test_binding.js"
+    },
+    "dependencies": {
+        "node-addon-api": "^1.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.11.9",
+        "ts-node": "^10.4.0"
+    },
+    "gypfile": true
+}

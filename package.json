@@ -8,14 +8,16 @@
     "types": "index.d.ts",
     "scripts": {
         "build": "ts-node src/generate.ts",
+        "install": "cmake-js compile",
         "test": "npm install && node --napi-modules ./test/test_binding.js"
     },
     "dependencies": {
+        "cmake-js": "^6.2.1",
         "node-addon-api": "^1.1.0"
     },
     "devDependencies": {
         "@types/node": "^16.11.9",
         "ts-node": "^10.4.0"
     },
-    "gypfile": true
+    "gypfile": false
 }

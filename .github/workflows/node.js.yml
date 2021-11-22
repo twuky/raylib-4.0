@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
 
     - name: Install Dependencies
-      run: sudo apt-get install xorg-dev libglu1-mesa-dev
+      run: sudo apt-get update && sudo apt-get install xorg-dev libglu1-mesa-dev
 
     - name: Install
       run: npm i

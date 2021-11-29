@@ -10,11 +10,8 @@ Vector2 Vector2FromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindVector2(const Napi::CallbackInfo& info) {
-	Vector2 object = Vector2();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.x = info[0].As<Napi::Number>();
 	out.Set("x", info[0].As<Napi::Object>());
-	object.y = info[1].As<Napi::Number>();
 	out.Set("y", info[1].As<Napi::Object>());
 	return out;
 }
@@ -35,13 +32,9 @@ Vector3 Vector3FromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindVector3(const Napi::CallbackInfo& info) {
-	Vector3 object = Vector3();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.x = info[0].As<Napi::Number>();
 	out.Set("x", info[0].As<Napi::Object>());
-	object.y = info[1].As<Napi::Number>();
 	out.Set("y", info[1].As<Napi::Object>());
-	object.z = info[2].As<Napi::Number>();
 	out.Set("z", info[2].As<Napi::Object>());
 	return out;
 }
@@ -64,15 +57,10 @@ Vector4 Vector4FromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindVector4(const Napi::CallbackInfo& info) {
-	Vector4 object = Vector4();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.x = info[0].As<Napi::Number>();
 	out.Set("x", info[0].As<Napi::Object>());
-	object.y = info[1].As<Napi::Number>();
 	out.Set("y", info[1].As<Napi::Object>());
-	object.z = info[2].As<Napi::Number>();
 	out.Set("z", info[2].As<Napi::Object>());
-	object.w = info[3].As<Napi::Number>();
 	out.Set("w", info[3].As<Napi::Object>());
 	return out;
 }
@@ -108,39 +96,22 @@ Matrix MatrixFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindMatrix(const Napi::CallbackInfo& info) {
-	Matrix object = Matrix();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.m0 = info[0].As<Napi::Number>();
 	out.Set("m0", info[0].As<Napi::Object>());
-	object.m1 = info[1].As<Napi::Number>();
 	out.Set("m1", info[1].As<Napi::Object>());
-	object.m2 = info[2].As<Napi::Number>();
 	out.Set("m2", info[2].As<Napi::Object>());
-	object.m3 = info[3].As<Napi::Number>();
 	out.Set("m3", info[3].As<Napi::Object>());
-	object.m4 = info[4].As<Napi::Number>();
 	out.Set("m4", info[4].As<Napi::Object>());
-	object.m5 = info[5].As<Napi::Number>();
 	out.Set("m5", info[5].As<Napi::Object>());
-	object.m6 = info[6].As<Napi::Number>();
 	out.Set("m6", info[6].As<Napi::Object>());
-	object.m7 = info[7].As<Napi::Number>();
 	out.Set("m7", info[7].As<Napi::Object>());
-	object.m8 = info[8].As<Napi::Number>();
 	out.Set("m8", info[8].As<Napi::Object>());
-	object.m9 = info[9].As<Napi::Number>();
 	out.Set("m9", info[9].As<Napi::Object>());
-	object.m10 = info[10].As<Napi::Number>();
 	out.Set("m10", info[10].As<Napi::Object>());
-	object.m11 = info[11].As<Napi::Number>();
 	out.Set("m11", info[11].As<Napi::Object>());
-	object.m12 = info[12].As<Napi::Number>();
 	out.Set("m12", info[12].As<Napi::Object>());
-	object.m13 = info[13].As<Napi::Number>();
 	out.Set("m13", info[13].As<Napi::Object>());
-	object.m14 = info[14].As<Napi::Number>();
 	out.Set("m14", info[14].As<Napi::Object>());
-	object.m15 = info[15].As<Napi::Number>();
 	out.Set("m15", info[15].As<Napi::Object>());
 	return out;
 }
@@ -176,15 +147,10 @@ Color ColorFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindColor(const Napi::CallbackInfo& info) {
-	Color object = Color();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.r = info[0].As<Napi::Number>().Uint32Value();
 	out.Set("r", info[0].As<Napi::Object>());
-	object.g = info[1].As<Napi::Number>().Uint32Value();
 	out.Set("g", info[1].As<Napi::Object>());
-	object.b = info[2].As<Napi::Number>().Uint32Value();
 	out.Set("b", info[2].As<Napi::Object>());
-	object.a = info[3].As<Napi::Number>().Uint32Value();
 	out.Set("a", info[3].As<Napi::Object>());
 	return out;
 }
@@ -208,15 +174,10 @@ Rectangle RectangleFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindRectangle(const Napi::CallbackInfo& info) {
-	Rectangle object = Rectangle();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.x = info[0].As<Napi::Number>();
 	out.Set("x", info[0].As<Napi::Object>());
-	object.y = info[1].As<Napi::Number>();
 	out.Set("y", info[1].As<Napi::Object>());
-	object.width = info[2].As<Napi::Number>();
 	out.Set("width", info[2].As<Napi::Object>());
-	object.height = info[3].As<Napi::Number>();
 	out.Set("height", info[3].As<Napi::Object>());
 	return out;
 }
@@ -241,17 +202,11 @@ Image ImageFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindImage(const Napi::CallbackInfo& info) {
-	Image object = Image();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.data = (void *)info[0].As<Napi::Number>().Int64Value();
-	out.Set("data", (int64_t)object.data);
-	object.width = info[1].As<Napi::Number>();
+	out.Set("data", info[0].As<Napi::Object>());
 	out.Set("width", info[1].As<Napi::Object>());
-	object.height = info[2].As<Napi::Number>();
 	out.Set("height", info[2].As<Napi::Object>());
-	object.mipmaps = info[3].As<Napi::Number>();
 	out.Set("mipmaps", info[3].As<Napi::Object>());
-	object.format = info[4].As<Napi::Number>();
 	out.Set("format", info[4].As<Napi::Object>());
 	return out;
 }
@@ -277,17 +232,11 @@ Texture TextureFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindTexture(const Napi::CallbackInfo& info) {
-	Texture object = Texture();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.id = info[0].As<Napi::Number>();
 	out.Set("id", info[0].As<Napi::Object>());
-	object.width = info[1].As<Napi::Number>();
 	out.Set("width", info[1].As<Napi::Object>());
-	object.height = info[2].As<Napi::Number>();
 	out.Set("height", info[2].As<Napi::Object>());
-	object.mipmaps = info[3].As<Napi::Number>();
 	out.Set("mipmaps", info[3].As<Napi::Object>());
-	object.format = info[4].As<Napi::Number>();
 	out.Set("format", info[4].As<Napi::Object>());
 	return out;
 }
@@ -311,13 +260,9 @@ RenderTexture RenderTextureFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindRenderTexture(const Napi::CallbackInfo& info) {
-	RenderTexture object = RenderTexture();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.id = info[0].As<Napi::Number>();
 	out.Set("id", info[0].As<Napi::Object>());
-	object.texture = TextureFromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("texture", info[1].As<Napi::Object>());
-	object.depth = TextureFromNAPIObject(info[2].As<Napi::Object>());
 	out.Set("depth", info[2].As<Napi::Object>());
 	return out;
 }
@@ -342,19 +287,12 @@ NPatchInfo NPatchInfoFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindNPatchInfo(const Napi::CallbackInfo& info) {
-	NPatchInfo object = NPatchInfo();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.source = RectangleFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("source", info[0].As<Napi::Object>());
-	object.left = info[1].As<Napi::Number>();
 	out.Set("left", info[1].As<Napi::Object>());
-	object.top = info[2].As<Napi::Number>();
 	out.Set("top", info[2].As<Napi::Object>());
-	object.right = info[3].As<Napi::Number>();
 	out.Set("right", info[3].As<Napi::Object>());
-	object.bottom = info[4].As<Napi::Number>();
 	out.Set("bottom", info[4].As<Napi::Object>());
-	object.layout = info[5].As<Napi::Number>();
 	out.Set("layout", info[5].As<Napi::Object>());
 	return out;
 }
@@ -381,17 +319,11 @@ GlyphInfo GlyphInfoFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindGlyphInfo(const Napi::CallbackInfo& info) {
-	GlyphInfo object = GlyphInfo();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.value = info[0].As<Napi::Number>();
 	out.Set("value", info[0].As<Napi::Object>());
-	object.offsetX = info[1].As<Napi::Number>();
 	out.Set("offsetX", info[1].As<Napi::Object>());
-	object.offsetY = info[2].As<Napi::Number>();
 	out.Set("offsetY", info[2].As<Napi::Object>());
-	object.advanceX = info[3].As<Napi::Number>();
 	out.Set("advanceX", info[3].As<Napi::Object>());
-	object.image = ImageFromNAPIObject(info[4].As<Napi::Object>());
 	out.Set("image", info[4].As<Napi::Object>());
 	return out;
 }
@@ -418,20 +350,13 @@ Font FontFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindFont(const Napi::CallbackInfo& info) {
-	Font object = Font();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.baseSize = info[0].As<Napi::Number>();
 	out.Set("baseSize", info[0].As<Napi::Object>());
-	object.glyphCount = info[1].As<Napi::Number>();
 	out.Set("glyphCount", info[1].As<Napi::Object>());
-	object.glyphPadding = info[2].As<Napi::Number>();
 	out.Set("glyphPadding", info[2].As<Napi::Object>());
-	object.texture = TextureFromNAPIObject(info[3].As<Napi::Object>());
 	out.Set("texture", info[3].As<Napi::Object>());
-	object.recs = (Rectangle *)info[4].As<Napi::Number>().Int64Value();
-	out.Set("recs", (int64_t)object.recs);
-	object.glyphs = (GlyphInfo *)info[5].As<Napi::Number>().Int64Value();
-	out.Set("glyphs", (int64_t)object.glyphs);
+	out.Set("recs", info[4].As<Napi::Object>());
+	out.Set("glyphs", info[5].As<Napi::Object>());
 	return out;
 }
 
@@ -457,17 +382,11 @@ Camera3D Camera3DFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindCamera3D(const Napi::CallbackInfo& info) {
-	Camera3D object = Camera3D();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.position = Vector3FromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("position", info[0].As<Napi::Object>());
-	object.target = Vector3FromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("target", info[1].As<Napi::Object>());
-	object.up = Vector3FromNAPIObject(info[2].As<Napi::Object>());
 	out.Set("up", info[2].As<Napi::Object>());
-	object.fovy = info[3].As<Napi::Number>();
 	out.Set("fovy", info[3].As<Napi::Object>());
-	object.projection = info[4].As<Napi::Number>();
 	out.Set("projection", info[4].As<Napi::Object>());
 	return out;
 }
@@ -492,15 +411,10 @@ Camera2D Camera2DFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindCamera2D(const Napi::CallbackInfo& info) {
-	Camera2D object = Camera2D();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.offset = Vector2FromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("offset", info[0].As<Napi::Object>());
-	object.target = Vector2FromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("target", info[1].As<Napi::Object>());
-	object.rotation = info[2].As<Napi::Number>();
 	out.Set("rotation", info[2].As<Napi::Object>());
-	object.zoom = info[3].As<Napi::Number>();
 	out.Set("zoom", info[3].As<Napi::Object>());
 	return out;
 }
@@ -535,38 +449,22 @@ Mesh MeshFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindMesh(const Napi::CallbackInfo& info) {
-	Mesh object = Mesh();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.vertexCount = info[0].As<Napi::Number>();
 	out.Set("vertexCount", info[0].As<Napi::Object>());
-	object.triangleCount = info[1].As<Napi::Number>();
 	out.Set("triangleCount", info[1].As<Napi::Object>());
-	object.vertices = (float *)info[2].As<Napi::Number>().Int64Value();
-	out.Set("vertices", (int64_t)object.vertices);
-	object.texcoords = (float *)info[3].As<Napi::Number>().Int64Value();
-	out.Set("texcoords", (int64_t)object.texcoords);
-	object.texcoords2 = (float *)info[4].As<Napi::Number>().Int64Value();
-	out.Set("texcoords2", (int64_t)object.texcoords2);
-	object.normals = (float *)info[5].As<Napi::Number>().Int64Value();
-	out.Set("normals", (int64_t)object.normals);
-	object.tangents = (float *)info[6].As<Napi::Number>().Int64Value();
-	out.Set("tangents", (int64_t)object.tangents);
-	object.colors = (unsigned char *)info[7].As<Napi::Number>().Int64Value();
-	out.Set("colors", (int64_t)object.colors);
-	object.indices = (unsigned short *)info[8].As<Napi::Number>().Int64Value();
-	out.Set("indices", (int64_t)object.indices);
-	object.animVertices = (float *)info[9].As<Napi::Number>().Int64Value();
-	out.Set("animVertices", (int64_t)object.animVertices);
-	object.animNormals = (float *)info[10].As<Napi::Number>().Int64Value();
-	out.Set("animNormals", (int64_t)object.animNormals);
-	object.boneIds = (unsigned char *)info[11].As<Napi::Number>().Int64Value();
-	out.Set("boneIds", (int64_t)object.boneIds);
-	object.boneWeights = (float *)info[12].As<Napi::Number>().Int64Value();
-	out.Set("boneWeights", (int64_t)object.boneWeights);
-	object.vaoId = info[13].As<Napi::Number>();
+	out.Set("vertices", info[2].As<Napi::Object>());
+	out.Set("texcoords", info[3].As<Napi::Object>());
+	out.Set("texcoords2", info[4].As<Napi::Object>());
+	out.Set("normals", info[5].As<Napi::Object>());
+	out.Set("tangents", info[6].As<Napi::Object>());
+	out.Set("colors", info[7].As<Napi::Object>());
+	out.Set("indices", info[8].As<Napi::Object>());
+	out.Set("animVertices", info[9].As<Napi::Object>());
+	out.Set("animNormals", info[10].As<Napi::Object>());
+	out.Set("boneIds", info[11].As<Napi::Object>());
+	out.Set("boneWeights", info[12].As<Napi::Object>());
 	out.Set("vaoId", info[13].As<Napi::Object>());
-	object.vboId = (unsigned int *)info[14].As<Napi::Number>().Int64Value();
-	out.Set("vboId", (int64_t)object.vboId);
+	out.Set("vboId", info[14].As<Napi::Object>());
 	return out;
 }
 
@@ -598,12 +496,9 @@ Shader ShaderFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindShader(const Napi::CallbackInfo& info) {
-	Shader object = Shader();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.id = info[0].As<Napi::Number>();
 	out.Set("id", info[0].As<Napi::Object>());
-	object.locs = (int *)info[1].As<Napi::Number>().Int64Value();
-	out.Set("locs", (int64_t)object.locs);
+	out.Set("locs", info[1].As<Napi::Object>());
 	return out;
 }
 
@@ -623,13 +518,9 @@ MaterialMap MaterialMapFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindMaterialMap(const Napi::CallbackInfo& info) {
-	MaterialMap object = MaterialMap();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.texture = TextureFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("texture", info[0].As<Napi::Object>());
-	object.color = ColorFromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("color", info[1].As<Napi::Object>());
-	object.value = info[2].As<Napi::Number>();
 	out.Set("value", info[2].As<Napi::Object>());
 	return out;
 }
@@ -651,13 +542,9 @@ Material MaterialFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindMaterial(const Napi::CallbackInfo& info) {
-	Material object = Material();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.shader = ShaderFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("shader", info[0].As<Napi::Object>());
-	object.maps = (MaterialMap *)info[1].As<Napi::Number>().Int64Value();
-	out.Set("maps", (int64_t)object.maps);
-	object.params[4] = info[2].As<Napi::Number>();
+	out.Set("maps", info[1].As<Napi::Object>());
 	out.Set("params[4]", info[2].As<Napi::Object>());
 	return out;
 }
@@ -679,13 +566,9 @@ Transform TransformFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindTransform(const Napi::CallbackInfo& info) {
-	Transform object = Transform();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.translation = Vector3FromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("translation", info[0].As<Napi::Object>());
-	object.rotation = Vector4FromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("rotation", info[1].As<Napi::Object>());
-	object.scale = Vector3FromNAPIObject(info[2].As<Napi::Object>());
 	out.Set("scale", info[2].As<Napi::Object>());
 	return out;
 }
@@ -706,11 +589,8 @@ BoneInfo BoneInfoFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindBoneInfo(const Napi::CallbackInfo& info) {
-	BoneInfo object = BoneInfo();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.name[32] = info[0].As<Napi::Number>().Uint32Value();
 	out.Set("name[32]", info[0].As<Napi::Object>());
-	object.parent = info[1].As<Napi::Number>();
 	out.Set("parent", info[1].As<Napi::Object>());
 	return out;
 }
@@ -737,26 +617,16 @@ Model ModelFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindModel(const Napi::CallbackInfo& info) {
-	Model object = Model();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.transform = MatrixFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("transform", info[0].As<Napi::Object>());
-	object.meshCount = info[1].As<Napi::Number>();
 	out.Set("meshCount", info[1].As<Napi::Object>());
-	object.materialCount = info[2].As<Napi::Number>();
 	out.Set("materialCount", info[2].As<Napi::Object>());
-	object.meshes = (Mesh *)info[3].As<Napi::Number>().Int64Value();
-	out.Set("meshes", (int64_t)object.meshes);
-	object.materials = (Material *)info[4].As<Napi::Number>().Int64Value();
-	out.Set("materials", (int64_t)object.materials);
-	object.meshMaterial = (int *)info[5].As<Napi::Number>().Int64Value();
-	out.Set("meshMaterial", (int64_t)object.meshMaterial);
-	object.boneCount = info[6].As<Napi::Number>();
+	out.Set("meshes", info[3].As<Napi::Object>());
+	out.Set("materials", info[4].As<Napi::Object>());
+	out.Set("meshMaterial", info[5].As<Napi::Object>());
 	out.Set("boneCount", info[6].As<Napi::Object>());
-	object.bones = (BoneInfo *)info[7].As<Napi::Number>().Int64Value();
-	out.Set("bones", (int64_t)object.bones);
-	object.bindPose = (Transform *)info[8].As<Napi::Number>().Int64Value();
-	out.Set("bindPose", (int64_t)object.bindPose);
+	out.Set("bones", info[7].As<Napi::Object>());
+	out.Set("bindPose", info[8].As<Napi::Object>());
 	return out;
 }
 
@@ -784,16 +654,11 @@ ModelAnimation ModelAnimationFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindModelAnimation(const Napi::CallbackInfo& info) {
-	ModelAnimation object = ModelAnimation();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.boneCount = info[0].As<Napi::Number>();
 	out.Set("boneCount", info[0].As<Napi::Object>());
-	object.frameCount = info[1].As<Napi::Number>();
 	out.Set("frameCount", info[1].As<Napi::Object>());
-	object.bones = (BoneInfo *)info[2].As<Napi::Number>().Int64Value();
-	out.Set("bones", (int64_t)object.bones);
-	object.framePoses = (Transform **)info[3].As<Napi::Number>().Int64Value();
-	out.Set("framePoses", (int64_t)object.framePoses);
+	out.Set("bones", info[2].As<Napi::Object>());
+	out.Set("framePoses", info[3].As<Napi::Object>());
 	return out;
 }
 
@@ -814,11 +679,8 @@ Ray RayFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindRay(const Napi::CallbackInfo& info) {
-	Ray object = Ray();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.position = Vector3FromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("position", info[0].As<Napi::Object>());
-	object.direction = Vector3FromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("direction", info[1].As<Napi::Object>());
 	return out;
 }
@@ -840,15 +702,10 @@ RayCollision RayCollisionFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindRayCollision(const Napi::CallbackInfo& info) {
-	RayCollision object = RayCollision();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.hit = info[0].As<Napi::Boolean>();
 	out.Set("hit", info[0].As<Napi::Object>());
-	object.distance = info[1].As<Napi::Number>();
 	out.Set("distance", info[1].As<Napi::Object>());
-	object.point = Vector3FromNAPIObject(info[2].As<Napi::Object>());
 	out.Set("point", info[2].As<Napi::Object>());
-	object.normal = Vector3FromNAPIObject(info[3].As<Napi::Object>());
 	out.Set("normal", info[3].As<Napi::Object>());
 	return out;
 }
@@ -870,11 +727,8 @@ BoundingBox BoundingBoxFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindBoundingBox(const Napi::CallbackInfo& info) {
-	BoundingBox object = BoundingBox();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.min = Vector3FromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("min", info[0].As<Napi::Object>());
-	object.max = Vector3FromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("max", info[1].As<Napi::Object>());
 	return out;
 }
@@ -897,18 +751,12 @@ Wave WaveFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindWave(const Napi::CallbackInfo& info) {
-	Wave object = Wave();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.frameCount = info[0].As<Napi::Number>();
 	out.Set("frameCount", info[0].As<Napi::Object>());
-	object.sampleRate = info[1].As<Napi::Number>();
 	out.Set("sampleRate", info[1].As<Napi::Object>());
-	object.sampleSize = info[2].As<Napi::Number>();
 	out.Set("sampleSize", info[2].As<Napi::Object>());
-	object.channels = info[3].As<Napi::Number>();
 	out.Set("channels", info[3].As<Napi::Object>());
-	object.data = (void *)info[4].As<Napi::Number>().Int64Value();
-	out.Set("data", (int64_t)object.data);
+	out.Set("data", info[4].As<Napi::Object>());
 	return out;
 }
 
@@ -932,15 +780,10 @@ AudioStream AudioStreamFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindAudioStream(const Napi::CallbackInfo& info) {
-	AudioStream object = AudioStream();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.buffer = (rAudioBuffer *)info[0].As<Napi::Number>().Int64Value();
-	out.Set("buffer", (int64_t)object.buffer);
-	object.sampleRate = info[1].As<Napi::Number>();
+	out.Set("buffer", info[0].As<Napi::Object>());
 	out.Set("sampleRate", info[1].As<Napi::Object>());
-	object.sampleSize = info[2].As<Napi::Number>();
 	out.Set("sampleSize", info[2].As<Napi::Object>());
-	object.channels = info[3].As<Napi::Number>();
 	out.Set("channels", info[3].As<Napi::Object>());
 	return out;
 }
@@ -962,11 +805,8 @@ Sound SoundFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindSound(const Napi::CallbackInfo& info) {
-	Sound object = Sound();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.stream = AudioStreamFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("stream", info[0].As<Napi::Object>());
-	object.frameCount = info[1].As<Napi::Number>();
 	out.Set("frameCount", info[1].As<Napi::Object>());
 	return out;
 }
@@ -989,18 +829,12 @@ Music MusicFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindMusic(const Napi::CallbackInfo& info) {
-	Music object = Music();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.stream = AudioStreamFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("stream", info[0].As<Napi::Object>());
-	object.frameCount = info[1].As<Napi::Number>();
 	out.Set("frameCount", info[1].As<Napi::Object>());
-	object.looping = info[2].As<Napi::Boolean>();
 	out.Set("looping", info[2].As<Napi::Object>());
-	object.ctxType = info[3].As<Napi::Number>();
 	out.Set("ctxType", info[3].As<Napi::Object>());
-	object.ctxData = (void *)info[4].As<Napi::Number>().Int64Value();
-	out.Set("ctxData", (int64_t)object.ctxData);
+	out.Set("ctxData", info[4].As<Napi::Object>());
 	return out;
 }
 
@@ -1030,27 +864,16 @@ VrDeviceInfo VrDeviceInfoFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindVrDeviceInfo(const Napi::CallbackInfo& info) {
-	VrDeviceInfo object = VrDeviceInfo();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.hResolution = info[0].As<Napi::Number>();
 	out.Set("hResolution", info[0].As<Napi::Object>());
-	object.vResolution = info[1].As<Napi::Number>();
 	out.Set("vResolution", info[1].As<Napi::Object>());
-	object.hScreenSize = info[2].As<Napi::Number>();
 	out.Set("hScreenSize", info[2].As<Napi::Object>());
-	object.vScreenSize = info[3].As<Napi::Number>();
 	out.Set("vScreenSize", info[3].As<Napi::Object>());
-	object.vScreenCenter = info[4].As<Napi::Number>();
 	out.Set("vScreenCenter", info[4].As<Napi::Object>());
-	object.eyeToScreenDistance = info[5].As<Napi::Number>();
 	out.Set("eyeToScreenDistance", info[5].As<Napi::Object>());
-	object.lensSeparationDistance = info[6].As<Napi::Number>();
 	out.Set("lensSeparationDistance", info[6].As<Napi::Object>());
-	object.interpupillaryDistance = info[7].As<Napi::Number>();
 	out.Set("interpupillaryDistance", info[7].As<Napi::Object>());
-	object.lensDistortionValues[4] = info[8].As<Napi::Number>();
 	out.Set("lensDistortionValues[4]", info[8].As<Napi::Object>());
-	object.chromaAbCorrection[4] = info[9].As<Napi::Number>();
 	out.Set("chromaAbCorrection[4]", info[9].As<Napi::Object>());
 	return out;
 }
@@ -1084,23 +907,14 @@ VrStereoConfig VrStereoConfigFromNAPIObject(Napi::Object obj) {
 }
 
 Napi::Object BindVrStereoConfig(const Napi::CallbackInfo& info) {
-	VrStereoConfig object = VrStereoConfig();
 	Napi::Object out = Napi::Object::New(info.Env());
-	object.projection[2] = MatrixFromNAPIObject(info[0].As<Napi::Object>());
 	out.Set("projection[2]", info[0].As<Napi::Object>());
-	object.viewOffset[2] = MatrixFromNAPIObject(info[1].As<Napi::Object>());
 	out.Set("viewOffset[2]", info[1].As<Napi::Object>());
-	object.leftLensCenter[2] = info[2].As<Napi::Number>();
 	out.Set("leftLensCenter[2]", info[2].As<Napi::Object>());
-	object.rightLensCenter[2] = info[3].As<Napi::Number>();
 	out.Set("rightLensCenter[2]", info[3].As<Napi::Object>());
-	object.leftScreenCenter[2] = info[4].As<Napi::Number>();
 	out.Set("leftScreenCenter[2]", info[4].As<Napi::Object>());
-	object.rightScreenCenter[2] = info[5].As<Napi::Number>();
 	out.Set("rightScreenCenter[2]", info[5].As<Napi::Object>());
-	object.scale[2] = info[6].As<Napi::Number>();
 	out.Set("scale[2]", info[6].As<Napi::Object>());
-	object.scaleIn[2] = info[7].As<Napi::Number>();
 	out.Set("scaleIn[2]", info[7].As<Napi::Object>());
 	return out;
 }

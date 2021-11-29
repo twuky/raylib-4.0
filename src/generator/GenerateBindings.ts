@@ -308,22 +308,13 @@ function GenerateStructConverters(struct: RaylibStruct) {
 		let constructor_name = `Bind${struct.name}`
 	
 		to_napi_object += `Napi::Object ${constructor_name}(const Napi::CallbackInfo& info) {` + br
-		to_napi_object += tab + `${struct.name} object = ${struct.name}();` + br
+		//to_napi_object += tab + `${struct.name} object = ${struct.name}();` + br
 		to_napi_object += tab + 'Napi::Object out = Napi::Object::New(info.Env());' + br
 	
 		for (let index = 0; index < struct.fields.length; index++) {
 			const field = struct.fields[index]
-			to_napi_object += tab + `object.${field.name} = ` + convert_info_arg(index, field.type) + br
-			if (field.type.endsWith('*')) {
-				to_napi_object += tab + `out.Set("${field.name}", (int64_t)object.${field.name});` + br
-			} else {
-				if (struct.name[0].toUpperCase() == struct.name[0]) {
-					to_napi_object += tab + `out.Set("${field.name}", info[${index}].As<Napi::Object>());` + br
-				} else {
-					to_napi_object += tab + `out.Set("${field.name}", object.${field.name});` + br
-				}
-			}
-			
+			//to_napi_object += tab + `object.${field.name} = ` + convert_info_arg(index, field.type) + br
+			to_napi_object += tab + `out.Set("${field.name}", info[${index}].As<Napi::Object>());` + br
 		}
 		to_napi_object += tab + 'return out;' + br
 		to_napi_object += '}' + br + br

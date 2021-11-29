@@ -56,7 +56,8 @@ include_directories(${PROJECT_NAME}
 
 # This is hardcoded so that updates force a re-compile.
 add_library(${PROJECT_NAME} SHARED
-  raylib_4.0.cc
+  src/simple_example_binding.cc
+  #raylib_4.0.cc
 )
 
 ## Suffix the node module with .node.

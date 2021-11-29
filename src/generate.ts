@@ -1,4 +1,3 @@
-import * as fs from 'fs'
 import { RaylibAPI } from './generator/JSONInterface'
 import { generateDefinitions } from './generator/GenerateTSDefinitions'
 import { GenerateCppBindings } from './generator/GenerateBindings'
@@ -76,9 +75,7 @@ function filterAPINames(api: RaylibAPI) {
 // 4.0 branch commit of the api JSON
 let url = 'https://raw.githubusercontent.com/raysan5/raylib/15fffa12a672d97e1427a96abd6d26913d51dd79/parser/raylib_api.json'
 
-let data = fs.readFileSync('./raylib/raylib_api.json').toString()
-
-let raylib_api = JSON.parse(data) as RaylibAPI
+let raylib_api = require('./raylib_api.json') as RaylibAPI
 
 filterAPINames(raylib_api)
 

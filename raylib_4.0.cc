@@ -5220,6 +5220,584 @@ void BindSetAudioStreamBufferSizeDefault(const Napi::CallbackInfo& info) {
 	);
 }
 
+Napi::Object WrapImageFormat(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageFormat(
+		&obj,
+		info[1].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageToPOT(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageToPOT(
+		&obj,
+		ColorFromNAPIObject(info[1].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageCrop(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageCrop(
+		&obj,
+		RectangleFromNAPIObject(info[1].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageAlphaCrop(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageAlphaCrop(
+		&obj,
+		info[1].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageAlphaClear(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageAlphaClear(
+		&obj,
+		ColorFromNAPIObject(info[1].As<Napi::Object>()),
+		info[2].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageAlphaMask(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageAlphaMask(
+		&obj,
+		ImageFromNAPIObject(info[1].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageAlphaPremultiply(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageAlphaPremultiply(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageResize(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageResize(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageResizeNN(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageResizeNN(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageResizeCanvas(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageResizeCanvas(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		info[4].As<Napi::Number>(),
+		ColorFromNAPIObject(info[5].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageMipmaps(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageMipmaps(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDither(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDither(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		info[4].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageFlipVertical(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageFlipVertical(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageFlipHorizontal(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageFlipHorizontal(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageRotateCW(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageRotateCW(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageRotateCCW(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageRotateCCW(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorTint(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorTint(
+		&obj,
+		ColorFromNAPIObject(info[1].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorInvert(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorInvert(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorGrayscale(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorGrayscale(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorContrast(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorContrast(
+		&obj,
+		info[1].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorBrightness(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorBrightness(
+		&obj,
+		info[1].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageColorReplace(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageColorReplace(
+		&obj,
+		ColorFromNAPIObject(info[1].As<Napi::Object>()),
+		ColorFromNAPIObject(info[2].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageClearBackground(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageClearBackground(
+		&obj,
+		ColorFromNAPIObject(info[1].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawPixel(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawPixel(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		ColorFromNAPIObject(info[3].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawPixelV(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawPixelV(
+		&obj,
+		Vector2FromNAPIObject(info[1].As<Napi::Object>()),
+		ColorFromNAPIObject(info[2].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawLine(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawLine(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		info[4].As<Napi::Number>(),
+		ColorFromNAPIObject(info[5].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawLineV(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawLineV(
+		&obj,
+		Vector2FromNAPIObject(info[1].As<Napi::Object>()),
+		Vector2FromNAPIObject(info[2].As<Napi::Object>()),
+		ColorFromNAPIObject(info[3].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawCircle(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawCircle(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		ColorFromNAPIObject(info[4].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawCircleV(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawCircleV(
+		&obj,
+		Vector2FromNAPIObject(info[1].As<Napi::Object>()),
+		info[2].As<Napi::Number>(),
+		ColorFromNAPIObject(info[3].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawRectangle(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawRectangle(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		info[4].As<Napi::Number>(),
+		ColorFromNAPIObject(info[5].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawRectangleV(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawRectangleV(
+		&obj,
+		Vector2FromNAPIObject(info[1].As<Napi::Object>()),
+		Vector2FromNAPIObject(info[2].As<Napi::Object>()),
+		ColorFromNAPIObject(info[3].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawRectangleRec(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawRectangleRec(
+		&obj,
+		RectangleFromNAPIObject(info[1].As<Napi::Object>()),
+		ColorFromNAPIObject(info[2].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawRectangleLines(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawRectangleLines(
+		&obj,
+		RectangleFromNAPIObject(info[1].As<Napi::Object>()),
+		info[2].As<Napi::Number>(),
+		ColorFromNAPIObject(info[3].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDraw(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDraw(
+		&obj,
+		ImageFromNAPIObject(info[1].As<Napi::Object>()),
+		RectangleFromNAPIObject(info[2].As<Napi::Object>()),
+		RectangleFromNAPIObject(info[3].As<Napi::Object>()),
+		ColorFromNAPIObject(info[4].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawText(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawText(
+		&obj,
+		info[1].As<Napi::String>().Utf8Value().c_str(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>(),
+		info[4].As<Napi::Number>(),
+		ColorFromNAPIObject(info[5].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapImageDrawTextEx(const Napi::CallbackInfo& info) {
+	Image obj = ImageFromNAPIObject(info[0].As<Napi::Object>());
+	ImageDrawTextEx(
+		&obj,
+		FontFromNAPIObject(info[1].As<Napi::Object>()),
+		info[2].As<Napi::String>().Utf8Value().c_str(),
+		Vector2FromNAPIObject(info[3].As<Napi::Object>()),
+		info[4].As<Napi::Number>(),
+		info[5].As<Napi::Number>(),
+		ColorFromNAPIObject(info[6].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("data", (int64_t)obj.data);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
 
 Napi::Object WrapUpdateCamera3D(const Napi::CallbackInfo& info) {
 	Camera3D params = Camera3DFromNAPIObject(info[0].As<Napi::Object>());
@@ -7715,6 +8293,186 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(
 		Napi::String::New(env, "UpdateCamera3D"),
 		Napi::Function::New(env, WrapUpdateCamera3D)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageFormat"),
+		Napi::Function::New(env, WrapImageFormat)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageToPOT"),
+		Napi::Function::New(env, WrapImageToPOT)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageCrop"),
+		Napi::Function::New(env, WrapImageCrop)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageAlphaCrop"),
+		Napi::Function::New(env, WrapImageAlphaCrop)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageAlphaClear"),
+		Napi::Function::New(env, WrapImageAlphaClear)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageAlphaMask"),
+		Napi::Function::New(env, WrapImageAlphaMask)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageAlphaPremultiply"),
+		Napi::Function::New(env, WrapImageAlphaPremultiply)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageResize"),
+		Napi::Function::New(env, WrapImageResize)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageResizeNN"),
+		Napi::Function::New(env, WrapImageResizeNN)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageResizeCanvas"),
+		Napi::Function::New(env, WrapImageResizeCanvas)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageMipmaps"),
+		Napi::Function::New(env, WrapImageMipmaps)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDither"),
+		Napi::Function::New(env, WrapImageDither)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageFlipVertical"),
+		Napi::Function::New(env, WrapImageFlipVertical)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageFlipHorizontal"),
+		Napi::Function::New(env, WrapImageFlipHorizontal)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageRotateCW"),
+		Napi::Function::New(env, WrapImageRotateCW)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageRotateCCW"),
+		Napi::Function::New(env, WrapImageRotateCCW)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorTint"),
+		Napi::Function::New(env, WrapImageColorTint)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorInvert"),
+		Napi::Function::New(env, WrapImageColorInvert)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorGrayscale"),
+		Napi::Function::New(env, WrapImageColorGrayscale)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorContrast"),
+		Napi::Function::New(env, WrapImageColorContrast)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorBrightness"),
+		Napi::Function::New(env, WrapImageColorBrightness)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageColorReplace"),
+		Napi::Function::New(env, WrapImageColorReplace)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageClearBackground"),
+		Napi::Function::New(env, WrapImageClearBackground)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawPixel"),
+		Napi::Function::New(env, WrapImageDrawPixel)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawPixelV"),
+		Napi::Function::New(env, WrapImageDrawPixelV)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawLine"),
+		Napi::Function::New(env, WrapImageDrawLine)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawLineV"),
+		Napi::Function::New(env, WrapImageDrawLineV)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawCircle"),
+		Napi::Function::New(env, WrapImageDrawCircle)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawCircleV"),
+		Napi::Function::New(env, WrapImageDrawCircleV)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawRectangle"),
+		Napi::Function::New(env, WrapImageDrawRectangle)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawRectangleV"),
+		Napi::Function::New(env, WrapImageDrawRectangleV)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawRectangleRec"),
+		Napi::Function::New(env, WrapImageDrawRectangleRec)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawRectangleLines"),
+		Napi::Function::New(env, WrapImageDrawRectangleLines)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDraw"),
+		Napi::Function::New(env, WrapImageDraw)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawText"),
+		Napi::Function::New(env, WrapImageDrawText)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapImageDrawTextEx"),
+		Napi::Function::New(env, WrapImageDrawTextEx)
 	);
 
 	return exports;

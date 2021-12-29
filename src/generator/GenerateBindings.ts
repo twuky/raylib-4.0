@@ -1,5 +1,9 @@
 import * as fs from "fs";
+import ConvertFunctionReturnType from "./FunctionReturnType";
+import wrappedFunctions from "./GenerateWrappedFunction";
+import convert_info_arg from "./InfoArgs";
 import { RaylibAPI, RaylibFunction, RaylibStruct } from "./JSONInterface";
+import convert_napi_object_property from "./ObjectProperty";
 
 let wrapped_functions = `
 Napi::Object WrapUpdateCamera3D(const Napi::CallbackInfo& info) {
@@ -139,150 +143,6 @@ let constructors = [
 	'Transform',
 	'Ray'
 ]
-
-
-function ConvertFunctionReturnType(type: string) {
-	if (type == 'void')
-		return 'void'
-
-	// cyrrently only in GetWindowHandle?
-	if (type == 'void *')
-		return 'void *'
-
-	if (type == 'int')
-		return 'Napi::Number'
-
-	if (type == 'float')
-		return 'Napi::Number'
-
-	if (type == 'double')
-		return 'Napi::Number'
-
-	if (type == 'long')
-		return 'Napi::Number'
-
-	if (type == 'unsigned int')
-		return 'Napi::Number'
-
-	if (type == 'const char *')
-		return 'Napi::String'
-
-	if (type == 'char *')
-		return 'Napi::String'
-
-	if (type == 'unsigned char *')
-		return 'Napi::String'
-
-	if (type == 'char **')
-		return 'Napi::Array'
-
-	if (type == 'const char **')
-		return 'Napi::Array'
-
-	if (type == 'int *')
-		return 'Napi::Array'
-
-	if (type == 'float *')
-		return 'Napi::Array'
-
-	if (type == 'bool')
-		return 'Napi::Boolean'
-
-	if (type) {
-		if (type.endsWith('*'))
-			return 'Napi::Array'
-		// Should Be class name
-		if (type[0].toUpperCase() == type[0])
-			return 'Napi::Object'
-	}
-	
-	throw new Error("FUNCTION RETURN TYPE NOT IMPLEMENTED: " + type);
-}
-
-function convert_info_arg(index: number, type: string) {
-	if (type == 'bool')
-		return `info[${index}].As<Napi::Boolean>();`
-
-	if (type == 'float')
-		return `info[${index}].As<Napi::Number>();`
-
-	if (type == 'int')
-		return `info[${index}].As<Napi::Number>();`
-
-	if (type == 'unsigned int')
-		return `info[${index}].As<Napi::Number>();`
-
-	if (type == 'const char *')
-		return `info[${index}].As<Napi::String>().Utf8Value().c_str();`
-
-	if (type == 'unsigned char')
-		return `info[${index}].As<Napi::Number>().Uint32Value();`
-
-	if (type == 'char')
-		return `info[${index}].As<Napi::Number>().Uint32Value();`
-
-	if (type == 'Camera')
-		type = 'Camera3D'
-
-	if (type == 'RenderTexture2D')
-		type = 'RenderTexture'
-
-	if (type == 'Texture2D')
-		type = 'Texture'
-
-	// Handles Arrays of things
-	if (type.endsWith('*'))
-		return `(${type})info[${index}].As<Napi::Number>().Int64Value();`
-
-	// Should Be class name
-	if (type[0].toUpperCase() == type[0])
-		return `${type}FromNAPIObject(info[${index}].As<Napi::Object>());`
-
-	throw new Error("C TYPE NOT IMPLEMENTED: " + type);
-	
-}
-
-function convert_napi_object_property(name: string, type: string) {
-
-	if (type == 'bool')
-		return `obj.Get("${name}").As<Napi::Boolean>();`
-
-	if (type == 'float')
-		return `obj.Get("${name}").As<Napi::Number>();`
-
-	if (type == 'int')
-		return `obj.Get("${name}").As<Napi::Number>();`
-
-	if (type == 'unsigned int')
-		return `obj.Get("${name}").As<Napi::Number>();`
-
-	if (type == 'const char *')
-		return `obj.Get("${name}").As<Napi::String>().Utf8Value().c_str()`
-
-	// Used in Color
-	if (type == 'unsigned char')
-		return `obj.Get("${name}").As<Napi::Number>().Uint32Value();`
-
-	//INFO: DON'T KNOW IF THIS IS RIGHT
-	if (type == 'char')
-		return `obj.Get("${name}").As<Napi::Number>().Uint32Value();`
-
-	if (type.endsWith('*'))
-		return `(${type})obj.Get("${name}").As<Napi::Number>().Int64Value();`
-
-	if (type == 'RenderTexture2D')
-		type = 'RenderTexture'
-
-	if (type == 'Texture2D')
-		type = 'Texture'
-
-	// Should Be class name
-	if (type[0].toUpperCase() == type[0])
-		return `${type}FromNAPIObject(obj.Get("${name}").As<Napi::Object>());`
-
-	throw new Error("C TYPE NOT IMPLEMENTED: " + type)
-}
-
 
 function GenerateStructConverters(struct: RaylibStruct) {
 	
@@ -426,6 +286,8 @@ function GenerateFunctionBinding(func: RaylibFunction, structs: RaylibStruct[], 
 
 export function GenerateCppBindings(api: RaylibAPI, output_path: string, hidden_functions: string[]) {
 
+	let auto_wrapped = wrappedFunctions(api.functions, api.structs)
+
 	let binding_text = ''
 
 	binding_text += `#include <napi.h>`+ br
@@ -441,6 +303,7 @@ export function GenerateCppBindings(api: RaylibAPI, output_path: string, hidden_
 		binding_text += GenerateFunctionBinding(func, api.structs, hidden_functions)
 	}
 
+	binding_text += auto_wrapped.funcs
 	binding_text += wrapped_functions
 
 	binding_text += br + 'Napi::Object Init(Napi::Env env, Napi::Object exports) {' + br
@@ -468,6 +331,8 @@ export function GenerateCppBindings(api: RaylibAPI, output_path: string, hidden_
 	}
 
 	binding_text += wrapped_function_bindings
+
+	binding_text += auto_wrapped.bindings
 
 	binding_text += br + tab + 'return exports;'
 	binding_text += br + '}' + br + br

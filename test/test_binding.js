@@ -8,8 +8,8 @@ const {
 // 13 functions: 9932 bunnies
 // 475 functions: 8184
 
-const screenWidth = 800
-const screenHeight = 800
+const screenWidth = 1280
+const screenHeight = 720
 
 class Bunny {
 

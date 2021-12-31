@@ -62,10 +62,7 @@ export default function wrappedFunctions(funcs: RaylibFunction[], structs: Rayli
 			params: func.params,
 			returnType: returnType
 		}
-		console.log(returnType)
 		returnType = ConvertFunctionReturnType(returnType)
-		console.log(returnType)
-
 		function_bind += returnType + ` Wrap${func.name}(const Napi::CallbackInfo& info) {` + br
 
 		let function_call = func.name + '(' + br

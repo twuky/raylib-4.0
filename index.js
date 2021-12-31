@@ -1,20 +1,7 @@
 var raylib = require('./build/Release/raylib-4.0');
 
-// UpdateCamera works with a camera pointer, so a wrapped function is made
-// that returns the object once modified
-/**
- * Update camera position for selected mode (SetCameraMode)
- */
-raylib.UpdateCamera = function (camera) {
-    var update = raylib.UpdateCamera3D(camera);
-    camera.position = update.position;
-    camera.target = update.target;
-    camera.up = update.up;
-    camera.fovy = update.fovy;
-    camera.projection = update.projection;
-};
-
 let wrapped = [
+    'UpdateCamera',
 	'ImageFormat',
 	'ImageToPOT',
 	'ImageCrop',

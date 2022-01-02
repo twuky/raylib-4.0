@@ -18,7 +18,6 @@ let hidden_functions = [
 	'DecodeDataBase64',
 	'LoadImagePalette',
 	'LoadImageColors',
-	'LoadRenderTexture',
 	'LoadFontData',
 	'LoadCodepoints',
 	'TextSplit',
@@ -67,7 +66,7 @@ function filterAPINames(api: RaylibAPI) {
 			func.returnType = 'Texture'
 
 		if (func.returnType == 'RenderTexture2D')
-			func.returnType = 'Texture'
+			func.returnType = 'RenderTexture'
 	}
 
 }

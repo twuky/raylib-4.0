@@ -3256,6 +3256,19 @@ Napi::Object BindLoadTextureCubemap(const Napi::CallbackInfo& info) {
 }
 
 
+Napi::Object BindLoadRenderTexture(const Napi::CallbackInfo& info) {
+	RenderTexture obj = LoadRenderTexture(
+		info[0].As<Napi::Number>(),
+		info[1].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("id", obj.id);
+	out.Set("texture", TextureToNAPIObject(info.Env(), obj.texture));
+	out.Set("depth", TextureToNAPIObject(info.Env(), obj.depth));
+	return out;
+}
+
+
 void BindUnloadTexture(const Napi::CallbackInfo& info) {
 	UnloadTexture(
 		TextureFromNAPIObject(info[0].As<Napi::Object>())
@@ -7313,6 +7326,11 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(
 		Napi::String::New(env, "LoadTextureCubemap"),
 		Napi::Function::New(env, BindLoadTextureCubemap)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "LoadRenderTexture"),
+		Napi::Function::New(env, BindLoadRenderTexture)
 	);
 
 	exports.Set(

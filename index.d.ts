@@ -2174,6 +2174,9 @@ export const RAYWHITE: Color
 	/** Load cubemap from image, multiple image cubemap layouts supported */
 	export function LoadTextureCubemap(image: Image, layout: number): Texture
 
+	/** Load texture for rendering (framebuffer) */
+	export function LoadRenderTexture(width: number, height: number): RenderTexture
+
 	/** Unload texture from GPU memory (VRAM) */
 	export function UnloadTexture(texture: Texture2D): void
 

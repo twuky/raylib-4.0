@@ -38,6 +38,15 @@ let wrapped = [
 	'ImageDraw',
 	'ImageDrawText',
 	'ImageDrawTextEx',
+    'GenTextureMipmaps',
+    'GenTextureMipmaps',
+	'UploadMesh',
+	'GenMeshTangents',
+	'GenMeshBinormals',
+	'SetMaterialTexture',
+	'SetModelMeshMaterial',
+	'WaveFormat',
+	'WaveCrop'
 ]
 // wrap functions with return type overrides (some C functions pass in object pointers)
 for (let func of wrapped) {

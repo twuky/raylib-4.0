@@ -39,6 +39,14 @@ let wrapped = [
 	'ImageDraw',
 	'ImageDrawText',
 	'ImageDrawTextEx',
+	'GenTextureMipmaps',
+	'UploadMesh',
+	'GenMeshTangents',
+	'GenMeshBinormals',
+	'SetMaterialTexture',
+	'SetModelMeshMaterial',
+	'WaveFormat',
+	'WaveCrop'
 ]
 
 let tab = '	'
@@ -56,6 +64,7 @@ export default function wrappedFunctions(funcs: RaylibFunction[], structs: Rayli
 		//@ts-ignore
 		let returnType = func.params[Object.keys(func.params)[0]] as string
 		returnType = returnType.slice(0, returnType.length - 2)
+		if (returnType == 'Texture2D') returnType = 'Texture'
 		func = {
 			description: func.description,
 			name: func.name,
@@ -103,7 +112,7 @@ export default function wrappedFunctions(funcs: RaylibFunction[], structs: Rayli
 				if (struct.name == func.returnType)
 					func_struct = struct
 			}
-	
+			console.log(func.returnType)
 			if (!func_struct.fields)
 				throw new Error("STRUCT SEARCH ERROR")
 	

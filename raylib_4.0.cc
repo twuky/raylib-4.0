@@ -5811,6 +5811,160 @@ Napi::Object WrapImageDrawTextEx(const Napi::CallbackInfo& info) {
 	return out;
 }
 
+Napi::Object WrapGenTextureMipmaps(const Napi::CallbackInfo& info) {
+	Texture obj = TextureFromNAPIObject(info[0].As<Napi::Object>());
+	GenTextureMipmaps(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("id", obj.id);
+	out.Set("width", obj.width);
+	out.Set("height", obj.height);
+	out.Set("mipmaps", obj.mipmaps);
+	out.Set("format", obj.format);
+	return out;
+}
+
+Napi::Object WrapUploadMesh(const Napi::CallbackInfo& info) {
+	Mesh obj = MeshFromNAPIObject(info[0].As<Napi::Object>());
+	UploadMesh(
+		&obj,
+		info[1].As<Napi::Boolean>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("vertexCount", obj.vertexCount);
+	out.Set("triangleCount", obj.triangleCount);
+	out.Set("vertices", (int64_t)obj.vertices);
+	out.Set("texcoords", (int64_t)obj.texcoords);
+	out.Set("texcoords2", (int64_t)obj.texcoords2);
+	out.Set("normals", (int64_t)obj.normals);
+	out.Set("tangents", (int64_t)obj.tangents);
+	out.Set("colors", (int64_t)obj.colors);
+	out.Set("indices", (int64_t)obj.indices);
+	out.Set("animVertices", (int64_t)obj.animVertices);
+	out.Set("animNormals", (int64_t)obj.animNormals);
+	out.Set("boneIds", (int64_t)obj.boneIds);
+	out.Set("boneWeights", (int64_t)obj.boneWeights);
+	out.Set("vaoId", obj.vaoId);
+	out.Set("vboId", (int64_t)obj.vboId);
+	return out;
+}
+
+Napi::Object WrapGenMeshTangents(const Napi::CallbackInfo& info) {
+	Mesh obj = MeshFromNAPIObject(info[0].As<Napi::Object>());
+	GenMeshTangents(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("vertexCount", obj.vertexCount);
+	out.Set("triangleCount", obj.triangleCount);
+	out.Set("vertices", (int64_t)obj.vertices);
+	out.Set("texcoords", (int64_t)obj.texcoords);
+	out.Set("texcoords2", (int64_t)obj.texcoords2);
+	out.Set("normals", (int64_t)obj.normals);
+	out.Set("tangents", (int64_t)obj.tangents);
+	out.Set("colors", (int64_t)obj.colors);
+	out.Set("indices", (int64_t)obj.indices);
+	out.Set("animVertices", (int64_t)obj.animVertices);
+	out.Set("animNormals", (int64_t)obj.animNormals);
+	out.Set("boneIds", (int64_t)obj.boneIds);
+	out.Set("boneWeights", (int64_t)obj.boneWeights);
+	out.Set("vaoId", obj.vaoId);
+	out.Set("vboId", (int64_t)obj.vboId);
+	return out;
+}
+
+Napi::Object WrapGenMeshBinormals(const Napi::CallbackInfo& info) {
+	Mesh obj = MeshFromNAPIObject(info[0].As<Napi::Object>());
+	GenMeshBinormals(
+		&obj
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("vertexCount", obj.vertexCount);
+	out.Set("triangleCount", obj.triangleCount);
+	out.Set("vertices", (int64_t)obj.vertices);
+	out.Set("texcoords", (int64_t)obj.texcoords);
+	out.Set("texcoords2", (int64_t)obj.texcoords2);
+	out.Set("normals", (int64_t)obj.normals);
+	out.Set("tangents", (int64_t)obj.tangents);
+	out.Set("colors", (int64_t)obj.colors);
+	out.Set("indices", (int64_t)obj.indices);
+	out.Set("animVertices", (int64_t)obj.animVertices);
+	out.Set("animNormals", (int64_t)obj.animNormals);
+	out.Set("boneIds", (int64_t)obj.boneIds);
+	out.Set("boneWeights", (int64_t)obj.boneWeights);
+	out.Set("vaoId", obj.vaoId);
+	out.Set("vboId", (int64_t)obj.vboId);
+	return out;
+}
+
+Napi::Object WrapSetMaterialTexture(const Napi::CallbackInfo& info) {
+	Material obj = MaterialFromNAPIObject(info[0].As<Napi::Object>());
+	SetMaterialTexture(
+		&obj,
+		info[1].As<Napi::Number>(),
+		TextureFromNAPIObject(info[2].As<Napi::Object>())
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("shader", ShaderToNAPIObject(info.Env(), obj.shader));
+	out.Set("maps", (int64_t)obj.maps);
+	out.Set("params[4]", obj.params[4]);
+	return out;
+}
+
+Napi::Object WrapSetModelMeshMaterial(const Napi::CallbackInfo& info) {
+	Model obj = ModelFromNAPIObject(info[0].As<Napi::Object>());
+	SetModelMeshMaterial(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("transform", MatrixToNAPIObject(info.Env(), obj.transform));
+	out.Set("meshCount", obj.meshCount);
+	out.Set("materialCount", obj.materialCount);
+	out.Set("meshes", (int64_t)obj.meshes);
+	out.Set("materials", (int64_t)obj.materials);
+	out.Set("meshMaterial", (int64_t)obj.meshMaterial);
+	out.Set("boneCount", obj.boneCount);
+	out.Set("bones", (int64_t)obj.bones);
+	out.Set("bindPose", (int64_t)obj.bindPose);
+	return out;
+}
+
+Napi::Object WrapWaveFormat(const Napi::CallbackInfo& info) {
+	Wave obj = WaveFromNAPIObject(info[0].As<Napi::Object>());
+	WaveFormat(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		info[3].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("frameCount", obj.frameCount);
+	out.Set("sampleRate", obj.sampleRate);
+	out.Set("sampleSize", obj.sampleSize);
+	out.Set("channels", obj.channels);
+	out.Set("data", (int64_t)obj.data);
+	return out;
+}
+
+Napi::Object WrapWaveCrop(const Napi::CallbackInfo& info) {
+	Wave obj = WaveFromNAPIObject(info[0].As<Napi::Object>());
+	WaveCrop(
+		&obj,
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>()
+	);
+	Napi::Object out = Napi::Object::New(info.Env());
+	out.Set("frameCount", obj.frameCount);
+	out.Set("sampleRate", obj.sampleRate);
+	out.Set("sampleSize", obj.sampleSize);
+	out.Set("channels", obj.channels);
+	out.Set("data", (int64_t)obj.data);
+	return out;
+}
+
 
 Napi::Object WrapUpdateCamera3D(const Napi::CallbackInfo& info) {
 	Camera3D params = Camera3DFromNAPIObject(info[0].As<Napi::Object>());
@@ -8491,6 +8645,46 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(
 		Napi::String::New(env, "WrapImageDrawTextEx"),
 		Napi::Function::New(env, WrapImageDrawTextEx)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapGenTextureMipmaps"),
+		Napi::Function::New(env, WrapGenTextureMipmaps)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapUploadMesh"),
+		Napi::Function::New(env, WrapUploadMesh)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapGenMeshTangents"),
+		Napi::Function::New(env, WrapGenMeshTangents)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapGenMeshBinormals"),
+		Napi::Function::New(env, WrapGenMeshBinormals)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapSetMaterialTexture"),
+		Napi::Function::New(env, WrapSetMaterialTexture)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapSetModelMeshMaterial"),
+		Napi::Function::New(env, WrapSetModelMeshMaterial)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapWaveFormat"),
+		Napi::Function::New(env, WrapWaveFormat)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "WrapWaveCrop"),
+		Napi::Function::New(env, WrapWaveCrop)
 	);
 
 	return exports;

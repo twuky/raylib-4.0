@@ -6,6 +6,88 @@ import { RaylibAPI, RaylibFunction, RaylibStruct } from "./JSONInterface";
 import convert_napi_object_property from "./ObjectProperty";
 
 let wrapped_functions = `
+void DrawTextureProZ(Texture2D texture, Rectangle source, Rectangle dest, Vector2 origin, float depth, float rotation, Color tint) {
+	// Check if texture is valid
+	if (texture.id > 0) {
+		rlEnableDepthTest();
+		float width = (float)texture.width;
+		float height = (float)texture.height;
+
+		bool flipX = false;
+
+		if (source.width < 0) { flipX = true; source.width *= -1; }
+		if (source.height < 0) source.y -= source.height;
+
+		Vector2 topLeft = { 0 };
+		Vector2 topRight = { 0 };
+		Vector2 bottomLeft = { 0 };
+		Vector2 bottomRight = { 0 };
+
+		// Only calculate rotation if needed
+		if (rotation == 0.0f)
+		{
+				float x = dest.x - origin.x;
+				float y = dest.y - origin.y;
+				topLeft = (Vector2){ x, y };
+				topRight = (Vector2){ x + dest.width, y };
+				bottomLeft = (Vector2){ x, y + dest.height };
+				bottomRight = (Vector2){ x + dest.width, y + dest.height };
+		}
+		else
+		{
+				float sinRotation = sinf(rotation*DEG2RAD);
+				float cosRotation = cosf(rotation*DEG2RAD);
+				float x = dest.x;
+				float y = dest.y;
+				float dx = -origin.x;
+				float dy = -origin.y;
+
+				topLeft.x = x + dx*cosRotation - dy*sinRotation;
+				topLeft.y = y + dx*sinRotation + dy*cosRotation;
+
+				topRight.x = x + (dx + dest.width)*cosRotation - dy*sinRotation;
+				topRight.y = y + (dx + dest.width)*sinRotation + dy*cosRotation;
+
+				bottomLeft.x = x + dx*cosRotation - (dy + dest.height)*sinRotation;
+				bottomLeft.y = y + dx*sinRotation + (dy + dest.height)*cosRotation;
+
+				bottomRight.x = x + (dx + dest.width)*cosRotation - (dy + dest.height)*sinRotation;
+				bottomRight.y = y + (dx + dest.width)*sinRotation + (dy + dest.height)*cosRotation;
+		}
+
+		rlCheckRenderBatchLimit(4);     // Make sure there is enough free space on the batch buffer
+
+		rlSetTexture(texture.id);
+		rlBegin(RL_QUADS);
+
+				rlColor4ub(tint.r, tint.g, tint.b, tint.a);
+				rlNormal3f(0.0f, 0.0f, 1.0f);                          // Normal vector pointing towards viewer
+
+				// Top-left corner for texture and quad
+				if (flipX) rlTexCoord2f((source.x + source.width)/width, source.y/height);
+				else rlTexCoord2f(source.x/width, source.y/height);
+				rlVertex3f(topLeft.x, topLeft.y, depth);
+
+				// Bottom-left corner for texture and quad
+				if (flipX) rlTexCoord2f((source.x + source.width)/width, (source.y + source.height)/height);
+				else rlTexCoord2f(source.x/width, (source.y + source.height)/height);
+				rlVertex3f(bottomLeft.x, bottomLeft.y, depth);
+
+				// Bottom-right corner for texture and quad
+				if (flipX) rlTexCoord2f(source.x/width, (source.y + source.height)/height);
+				else rlTexCoord2f((source.x + source.width)/width, (source.y + source.height)/height);
+				rlVertex3f(bottomRight.x, bottomRight.y, depth);
+
+				// Top-right corner for texture and quad
+				if (flipX) rlTexCoord2f(source.x/width, source.y/height);
+				else rlTexCoord2f((source.x + source.width)/width, source.y/height);
+				rlVertex3f(topRight.x, topRight.y, depth);
+
+		rlEnd();
+		rlSetTexture(0);
+	}
+}
+
 Napi::Object WrapUpdateCamera3D(const Napi::CallbackInfo& info) {
 	Camera3D params = Camera3DFromNAPIObject(info[0].As<Napi::Object>());
 	UpdateCamera(
@@ -89,6 +171,18 @@ void SetShaderSampler2D(const Napi::CallbackInfo& info) {
 	);
 }
 
+void BindDrawTextureProZ(const Napi::CallbackInfo& info) {
+	DrawTextureProZ(
+		TextureFromNAPIObject(info[0].As<Napi::Object>()),
+		RectangleFromNAPIObject(info[1].As<Napi::Object>()),
+		RectangleFromNAPIObject(info[2].As<Napi::Object>()),
+		Vector2FromNAPIObject(info[3].As<Napi::Object>()),
+		info[4].As<Napi::Number>(),
+		info[5].As<Napi::Number>(),
+		ColorFromNAPIObject(info[6].As<Napi::Object>())
+	);
+}
+
 `
 let wrapped_function_bindings = `
 	exports.Set(
@@ -124,6 +218,11 @@ let wrapped_function_bindings = `
 	exports.Set(
 		Napi::String::New(env, "UpdateCamera3D"),
 		Napi::Function::New(env, WrapUpdateCamera3D)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "DrawTextureProZ"),
+		Napi::Function::New(env, BindDrawTextureProZ)
 	);
 `
 
@@ -291,7 +390,9 @@ export function GenerateCppBindings(api: RaylibAPI, output_path: string, hidden_
 	let binding_text = ''
 
 	binding_text += `#include <napi.h>`+ br
+	binding_text += `#include <math.h>`+ br
 	binding_text += `#include "./raylib/include/raylib.h"`+ br
+	binding_text += `#include "./raylib/include/rlgl.h"`+ br
 	binding_text += `using namespace Napi;`+ br + br
 
 	for (let struct of api.structs) {

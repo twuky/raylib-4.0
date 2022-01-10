@@ -5,6 +5,12 @@
     "license": "ISC",
     "description": "NodeJS Bindings for the raylib graphics library.",
     "main": "index.js",
+    "files": [
+        "raylib",
+        "index.js",
+        "raylib_4.0.cc",
+        "CMakeLists.txt"
+    ],
     "types": "index.d.ts",
     "scripts": {
         "generate": "ts-node src/generate.ts",

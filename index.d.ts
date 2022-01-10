@@ -2762,7 +2762,4 @@ export const RAYWHITE: Color
 
 	/** Set shader uniform value Sampler2D (Texture) */
 	export function SetShaderSampler2D(shader: Shader, location: number, value: Texture2D): void
-
-	/** Draw a texture with a provided Z depth */
-	export function DrawTextureProZ(texture: Texture, source: Rectangle, dest: Rectangle, origin: Vector2, depth: number, rotation: number, tint: Color): void
 }

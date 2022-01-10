@@ -5,8 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/node_modules/node-addon-api",
-                "${workspaceFolder}/raylib/include",
-                "${workspaceFolder}/node_modules/node-addon-api/external-napi"
+                "${workspaceFolder}/raylib/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

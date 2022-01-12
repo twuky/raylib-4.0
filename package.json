@@ -8,6 +8,7 @@
     "files": [
         "raylib",
         "index.js",
+        "index.d.ts",
         "raylib_4.0.cc",
         "CMakeLists.txt"
     ],

@@ -5,6 +5,8 @@
     "license": "ISC",
     "description": "NodeJS Bindings for the raylib graphics library.",
     "main": "index.js",
+    "types": "index.d.ts",
+    "repository": "https://github.com/twuky/raylib-4.0",
     "files": [
         "raylib",
         "index.js",
@@ -12,7 +14,6 @@
         "raylib_4.0.cc",
         "CMakeLists.txt"
     ],
-    "types": "index.d.ts",
     "scripts": {
         "generate": "ts-node src/generate.ts",
         "install": "cmake-js build",

@@ -71,7 +71,7 @@ function argumentTypeConversion(arg: string) {
 	if (arg === 'const char *') {return 'string'}
 	if (arg === 'const char **') {return 'string'}
 	if (arg === 'char **') {return 'string'}
-	if (arg === 'const unsigned char *') {return 'string'}
+	if (arg === 'const unsigned char *') {return 'Buffer'}
 	if (arg === 'unsigned char *') {return 'string'}
 
 	if (arg === 'int') {return 'number'}

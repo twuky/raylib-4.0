@@ -18,6 +18,9 @@ export default function convert_info_arg(index: number, type: string) {
 	if (type == 'unsigned char')
 		return `info[${index}].As<Napi::Number>().Uint32Value();`
 
+	if (type == 'const unsigned char *' || type == 'const unsigned char*')
+		return `info[${index}].As<Napi::Buffer<unsigned char>>().Data();`
+
 	if (type == 'char')
 		return `info[${index}].As<Napi::Number>().Uint32Value();`
 

@@ -1740,7 +1740,7 @@ Napi::Number BindGetFileModTime(const Napi::CallbackInfo& info) {
 Napi::String BindEncodeDataBase64(const Napi::CallbackInfo& info) {
 	return Napi::String::New(info.Env(), 
 		EncodeDataBase64(
-		(const unsigned char *)info[0].As<Napi::Number>().Int64Value(),
+		info[0].As<Napi::Buffer<unsigned char>>().Data(),
 		info[1].As<Napi::Number>(),
 		(int *)info[2].As<Napi::Number>().Int64Value()
 	)
@@ -2637,7 +2637,7 @@ Napi::Object BindLoadImageAnim(const Napi::CallbackInfo& info) {
 Napi::Object BindLoadImageFromMemory(const Napi::CallbackInfo& info) {
 	Image obj = LoadImageFromMemory(
 		info[0].As<Napi::String>().Utf8Value().c_str(),
-		(const unsigned char *)info[1].As<Napi::Number>().Int64Value(),
+		info[1].As<Napi::Buffer<unsigned char>>().Data(),
 		info[2].As<Napi::Number>()
 	);
 	Napi::Object out = Napi::Object::New(info.Env());
@@ -3622,7 +3622,7 @@ Napi::Object BindLoadFontFromImage(const Napi::CallbackInfo& info) {
 Napi::Object BindLoadFontFromMemory(const Napi::CallbackInfo& info) {
 	Font obj = LoadFontFromMemory(
 		info[0].As<Napi::String>().Utf8Value().c_str(),
-		(const unsigned char *)info[1].As<Napi::Number>().Int64Value(),
+		info[1].As<Napi::Buffer<unsigned char>>().Data(),
 		info[2].As<Napi::Number>(),
 		info[3].As<Napi::Number>(),
 		(int *)info[4].As<Napi::Number>().Int64Value(),
@@ -4861,7 +4861,7 @@ Napi::Object BindLoadWave(const Napi::CallbackInfo& info) {
 Napi::Object BindLoadWaveFromMemory(const Napi::CallbackInfo& info) {
 	Wave obj = LoadWaveFromMemory(
 		info[0].As<Napi::String>().Utf8Value().c_str(),
-		(const unsigned char *)info[1].As<Napi::Number>().Int64Value(),
+		info[1].As<Napi::Buffer<unsigned char>>().Data(),
 		info[2].As<Napi::Number>()
 	);
 	Napi::Object out = Napi::Object::New(info.Env());

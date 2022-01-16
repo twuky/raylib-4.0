@@ -1686,7 +1686,7 @@ export const RAYWHITE: Color
 	export function GetFileModTime(fileName: string): number
 
 	/** Encode data to Base64 string */
-	export function EncodeDataBase64(data: string, dataLength: number, outputLength: number[]): string
+	export function EncodeDataBase64(data: Buffer, dataLength: number, outputLength: number[]): string
 
 	/** Save integer value to storage file (to defined position), returns true on success */
 	export function SaveStorageValue(position: number, value: number): boolean
@@ -1995,7 +1995,7 @@ export const RAYWHITE: Color
 	export function LoadImageAnim(fileName: string, frames: number[]): Image
 
 	/** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
-	export function LoadImageFromMemory(fileType: string, fileData: string, dataSize: number): Image
+	export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
 
 	/** Load image from GPU texture data */
 	export function LoadImageFromTexture(texture: Texture2D): Image
@@ -2274,7 +2274,7 @@ export const RAYWHITE: Color
 	export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
 
 	/** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
-	export function LoadFontFromMemory(fileType: string, fileData: string, dataSize: number, fontSize: number, fontChars: number[], glyphCount: number): Font
+	export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, fontChars: number[], glyphCount: number): Font
 
 	/** Generate image font atlas using chars info */
 	export function GenImageFontAtlas(chars: GlyphInfo, recs: Rectangle[], glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
@@ -2601,7 +2601,7 @@ export const RAYWHITE: Color
 	export function LoadWave(fileName: string): Wave
 
 	/** Load wave from memory buffer, fileType refers to extension: i.e. '.wav' */
-	export function LoadWaveFromMemory(fileType: string, fileData: string, dataSize: number): Wave
+	export function LoadWaveFromMemory(fileType: string, fileData: Buffer, dataSize: number): Wave
 
 	/** Load sound from file */
 	export function LoadSound(fileName: string): Sound

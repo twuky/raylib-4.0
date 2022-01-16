@@ -989,19 +989,19 @@ export const RAYWHITE: Color
 		triangleCount: number
 
 		/** Vertex position (XYZ - 3 components per vertex) (shader-location = 0) */
-		vertices: number[]
+		vertices: number
 
 		/** Vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1) */
-		texcoords: number[]
+		texcoords: number
 
 		/** Vertex second texture coordinates (useful for lightmaps) (shader-location = 5) */
-		texcoords2: number[]
+		texcoords2: number
 
 		/** Vertex normals (XYZ - 3 components per vertex) (shader-location = 2) */
-		normals: number[]
+		normals: number
 
 		/** Vertex tangents (XYZW - 4 components per vertex) (shader-location = 4) */
-		tangents: number[]
+		tangents: number
 
 		/** Vertex colors (RGBA - 4 components per vertex) (shader-location = 3) */
 		colors: string
@@ -1010,16 +1010,16 @@ export const RAYWHITE: Color
 		indices: number[]
 
 		/** Animated vertex positions (after bones transformations) */
-		animVertices: number[]
+		animVertices: number
 
 		/** Animated normals (after bones transformations) */
-		animNormals: number[]
+		animNormals: number
 
 		/** Vertex bone ids, max 255 bone ids, up to 4 bones influence by vertex (skinning) */
 		boneIds: string
 
 		/** Vertex bone weight, up to 4 bones influence by vertex (skinning) */
-		boneWeights: number[]
+		boneWeights: number
 
 		/** OpenGL Vertex Array Object id */
 		vaoId: number
@@ -1036,7 +1036,7 @@ export const RAYWHITE: Color
 		id: number
 
 		/** Shader locations array (RL_MAX_SHADER_LOCATIONS) */
-		locs: number[]
+		locs: number
 
 	}
 
@@ -1112,7 +1112,7 @@ export const RAYWHITE: Color
 		materials: Material
 
 		/** Mesh material number */
-		meshMaterial: number[]
+		meshMaterial: number
 
 		/** Number of bones */
 		boneCount: number
@@ -1686,7 +1686,7 @@ export const RAYWHITE: Color
 	export function GetFileModTime(fileName: string): number
 
 	/** Encode data to Base64 string */
-	export function EncodeDataBase64(data: Buffer, dataLength: number, outputLength: number[]): string
+	export function EncodeDataBase64(data: Buffer, dataLength: number, outputLength: number): string
 
 	/** Save integer value to storage file (to defined position), returns true on success */
 	export function SaveStorageValue(position: number, value: number): boolean
@@ -1992,7 +1992,7 @@ export const RAYWHITE: Color
 	export function LoadImageRaw(fileName: string, width: number, height: number, format: number, headerSize: number): Image
 
 	/** Load image sequence from file (frames appended to image.data) */
-	export function LoadImageAnim(fileName: string, frames: number[]): Image
+	export function LoadImageAnim(fileName: string, frames: number): Image
 
 	/** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
 	export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
@@ -2111,11 +2111,17 @@ export const RAYWHITE: Color
 	/** Modify image color: replace color */
 	export function ImageColorReplace(image: Image, color: Color, replace: Color): void
 
+	/** Load color data from image as a Color array (RGBA - 32bit) */
+	export function LoadImageColors(image: Image): number
+
+	/** Load colors palette from image as a Color array (RGBA - 32bit) */
+	export function LoadImagePalette(image: Image, maxPaletteSize: number, colorCount: number): number
+
 	/** Unload color data loaded with LoadImageColors() */
-	export function UnloadImageColors(colors: Color): void
+	export function UnloadImageColors(colors: number): void
 
 	/** Unload colors palette loaded with LoadImagePalette() */
-	export function UnloadImagePalette(colors: Color): void
+	export function UnloadImagePalette(colors: number): void
 
 	/** Get image alpha border rectangle */
 	export function GetImageAlphaBorder(image: Image, threshold: number): Rectangle
@@ -2268,13 +2274,16 @@ export const RAYWHITE: Color
 	export function LoadFont(fileName: string): Font
 
 	/** Load font from file with extended parameters */
-	export function LoadFontEx(fileName: string, fontSize: number, fontChars: number[], glyphCount: number): Font
+	export function LoadFontEx(fileName: string, fontSize: number, fontChars: number, glyphCount: number): Font
 
 	/** Load font from Image (XNA style) */
 	export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
 
 	/** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
-	export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, fontChars: number[], glyphCount: number): Font
+	export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number): Font
+
+	/** Load font data for further use */
+	export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number, type: number): GlyphInfo
 
 	/** Generate image font atlas using chars info */
 	export function GenImageFontAtlas(chars: GlyphInfo, recs: Rectangle[], glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
@@ -2315,20 +2324,23 @@ export const RAYWHITE: Color
 	/** Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to '?' if not found */
 	export function GetGlyphAtlasRec(font: Font, codepoint: number): Rectangle
 
+	/** Load all codepoints from a UTF-8 text string, codepoints count returned by parameter */
+	export function LoadCodepoints(text: string, count: number): number
+
 	/** Unload codepoints data from memory */
-	export function UnloadCodepoints(codepoints: number[]): void
+	export function UnloadCodepoints(codepoints: number): void
 
 	/** Get total number of codepoints in a UTF-8 encoded string */
 	export function GetCodepointCount(text: string): number
 
 	/** Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure */
-	export function GetCodepoint(text: string, bytesProcessed: number[]): number
+	export function GetCodepoint(text: string, bytesProcessed: number): number
 
 	/** Encode one codepoint into UTF-8 byte array (array length returned as parameter) */
-	export function CodepointToUTF8(codepoint: number, byteSize: number[]): string
+	export function CodepointToUTF8(codepoint: number, byteSize: number): string
 
 	/** Encode text as codepoints array into UTF-8 text string (WARNING: memory must be freed!) */
-	export function TextCodepointsToUTF8(codepoints: number[], length: number): string
+	export function TextCodepointsToUTF8(codepoints: number, length: number): string
 
 	/** Copy one string to another, returns bytes copied */
 	export function TextCopy(dst: string, src: string): number
@@ -2355,7 +2367,7 @@ export const RAYWHITE: Color
 	export function TextJoin(textList: string, count: number, delimiter: string): string
 
 	/** Append text at specific position and move cursor! */
-	export function TextAppend(text: string, append: string, position: number[]): void
+	export function TextAppend(text: string, append: string, position: number): void
 
 	/** Find first text occurrence within a string */
 	export function TextFindIndex(text: string, find: string): number
@@ -2534,6 +2546,9 @@ export const RAYWHITE: Color
 	/** Generate cubes-based map mesh from image data */
 	export function GenMeshCubicmap(cubicmap: Image, cubeSize: Vector3): Mesh
 
+	/** Load materials from model file */
+	export function LoadMaterials(fileName: string, materialCount: number): Material
+
 	/** Load default material (Supports: DIFFUSE, SPECULAR, NORMAL maps) */
 	export function LoadMaterialDefault(): Material
 
@@ -2663,8 +2678,11 @@ export const RAYWHITE: Color
 	/** Crop a wave to defined samples range */
 	export function WaveCrop(wave: Wave, initSample: number, finalSample: number): void
 
+	/** Load samples data from wave as a floats array */
+	export function LoadWaveSamples(wave: Wave): number
+
 	/** Unload samples data loaded with LoadWaveSamples() */
-	export function UnloadWaveSamples(samples: number[]): void
+	export function UnloadWaveSamples(samples: number): void
 
 	/** Load music stream from file */
 	export function LoadMusicStream(fileName: string): Music

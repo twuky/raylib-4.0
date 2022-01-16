@@ -211,6 +211,11 @@ function GenerateFunctionBinding(func: RaylibFunction, structs: RaylibStruct[], 
 
 	function_bind += returnType + ` Bind${func.name}(const Napi::CallbackInfo& info) {` + br
 	let function_call = func.name + '(' + br
+
+	if (func.returnType.endsWith('*') && returnType == 'Napi::Number') {
+		function_call = '(int64_t)' + function_call
+	}
+
 	let index = -1
 	for (let key in func.params) { if (func.params.hasOwnProperty(key)) {
 		if (index < 0) index = 0

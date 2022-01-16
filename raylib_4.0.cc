@@ -3039,6 +3039,24 @@ void BindImageColorReplace(const Napi::CallbackInfo& info) {
 	);
 }
 
+Napi::Number BindLoadImageColors(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadImageColors(
+		ImageFromNAPIObject(info[0].As<Napi::Object>())
+	)
+);
+}
+
+Napi::Number BindLoadImagePalette(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadImagePalette(
+		ImageFromNAPIObject(info[0].As<Napi::Object>()),
+		info[1].As<Napi::Number>(),
+		(int *)info[2].As<Napi::Number>().Int64Value()
+	)
+);
+}
+
 void BindUnloadImageColors(const Napi::CallbackInfo& info) {
 	UnloadImageColors(
 		(Color *)info[0].As<Napi::Number>().Int64Value()
@@ -3639,6 +3657,19 @@ Napi::Object BindLoadFontFromMemory(const Napi::CallbackInfo& info) {
 }
 
 
+Napi::Number BindLoadFontData(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadFontData(
+		info[0].As<Napi::Buffer<unsigned char>>().Data(),
+		info[1].As<Napi::Number>(),
+		info[2].As<Napi::Number>(),
+		(int *)info[3].As<Napi::Number>().Int64Value(),
+		info[4].As<Napi::Number>(),
+		info[5].As<Napi::Number>()
+	)
+);
+}
+
 Napi::Object BindGenImageFontAtlas(const Napi::CallbackInfo& info) {
 	Image obj = GenImageFontAtlas(
 		(const GlyphInfo *)info[0].As<Napi::Number>().Int64Value(),
@@ -3782,6 +3813,15 @@ Napi::Object BindGetGlyphAtlasRec(const Napi::CallbackInfo& info) {
 	return out;
 }
 
+
+Napi::Number BindLoadCodepoints(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadCodepoints(
+		info[0].As<Napi::String>().Utf8Value().c_str(),
+		(int *)info[1].As<Napi::Number>().Int64Value()
+	)
+);
+}
 
 void BindUnloadCodepoints(const Napi::CallbackInfo& info) {
 	UnloadCodepoints(
@@ -4641,6 +4681,15 @@ Napi::Object BindGenMeshCubicmap(const Napi::CallbackInfo& info) {
 }
 
 
+Napi::Number BindLoadMaterials(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadMaterials(
+		info[0].As<Napi::String>().Utf8Value().c_str(),
+		(int *)info[1].As<Napi::Number>().Int64Value()
+	)
+);
+}
+
 Napi::Object BindLoadMaterialDefault(const Napi::CallbackInfo& info) {
 	Material obj = LoadMaterialDefault(	);
 	Napi::Object out = Napi::Object::New(info.Env());
@@ -5025,6 +5074,14 @@ void BindWaveCrop(const Napi::CallbackInfo& info) {
 		info[1].As<Napi::Number>(),
 		info[2].As<Napi::Number>()
 	);
+}
+
+Napi::Number BindLoadWaveSamples(const Napi::CallbackInfo& info) {
+	return Napi::Number::New(info.Env(), 
+		(int64_t)LoadWaveSamples(
+		WaveFromNAPIObject(info[0].As<Napi::Object>())
+	)
+);
 }
 
 void BindUnloadWaveSamples(const Napi::CallbackInfo& info) {
@@ -7378,6 +7435,16 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	);
 
 	exports.Set(
+		Napi::String::New(env, "LoadImageColors"),
+		Napi::Function::New(env, BindLoadImageColors)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "LoadImagePalette"),
+		Napi::Function::New(env, BindLoadImagePalette)
+	);
+
+	exports.Set(
 		Napi::String::New(env, "UnloadImageColors"),
 		Napi::Function::New(env, BindUnloadImageColors)
 	);
@@ -7653,6 +7720,11 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	);
 
 	exports.Set(
+		Napi::String::New(env, "LoadFontData"),
+		Napi::Function::New(env, BindLoadFontData)
+	);
+
+	exports.Set(
 		Napi::String::New(env, "GenImageFontAtlas"),
 		Napi::Function::New(env, BindGenImageFontAtlas)
 	);
@@ -7715,6 +7787,11 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(
 		Napi::String::New(env, "GetGlyphAtlasRec"),
 		Napi::Function::New(env, BindGetGlyphAtlasRec)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "LoadCodepoints"),
+		Napi::Function::New(env, BindLoadCodepoints)
 	);
 
 	exports.Set(
@@ -8083,6 +8160,11 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	);
 
 	exports.Set(
+		Napi::String::New(env, "LoadMaterials"),
+		Napi::Function::New(env, BindLoadMaterials)
+	);
+
+	exports.Set(
 		Napi::String::New(env, "LoadMaterialDefault"),
 		Napi::Function::New(env, BindLoadMaterialDefault)
 	);
@@ -8295,6 +8377,11 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
 	exports.Set(
 		Napi::String::New(env, "WaveCrop"),
 		Napi::Function::New(env, BindWaveCrop)
+	);
+
+	exports.Set(
+		Napi::String::New(env, "LoadWaveSamples"),
+		Napi::Function::New(env, BindLoadWaveSamples)
 	);
 
 	exports.Set(

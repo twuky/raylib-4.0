@@ -87,8 +87,8 @@ function argumentTypeConversion(arg: string) {
 
 	if (arg === 'bool') {return 'boolean'}
 	
-	if (arg === 'float *') {return 'number[]'}
-	if (arg === 'int *') {return 'number[]'}
+	if (arg === 'float *') {return 'number'}
+	if (arg === 'int *') {return 'number'}
 	if (arg === 'unsigned short *') {return 'number[]'}
 	if (arg === 'unsigned int *') {return 'number[]'}
 
@@ -97,6 +97,8 @@ function argumentTypeConversion(arg: string) {
 	if (arg === 'Camera') {return 'Camera3D'}
 	if (arg === 'rAudioBuffer *') {return 'any'}
 
+	if (arg === 'Color *') {return 'number'}
+	
 	// fallback (mostly for Raylib struct types or void)
 	arg = arg.replace('const ', '')
 	if (arg.includes('*')) {

@@ -38,18 +38,12 @@ export default function ConvertFunctionReturnType(type: string) {
 	if (type == 'const char **')
 		return 'Napi::Array'
 
-	if (type == 'int *')
-		return 'Napi::Array'
-
-	if (type == 'float *')
-		return 'Napi::Array'
-
 	if (type == 'bool')
 		return 'Napi::Boolean'
 
 	if (type) {
 		if (type.endsWith('*'))
-			return 'Napi::Array'
+			return 'Napi::Number'
 		// Should Be class name
 		if (type[0].toUpperCase() == type[0])
 			return 'Napi::Object'

@@ -89,8 +89,8 @@ function argumentTypeConversion(arg: string) {
 	
 	if (arg === 'float *') {return 'number'}
 	if (arg === 'int *') {return 'number'}
-	if (arg === 'unsigned short *') {return 'number[]'}
-	if (arg === 'unsigned int *') {return 'number[]'}
+	if (arg === 'unsigned short *') {return 'number'}
+	if (arg === 'unsigned int *') {return 'number'}
 
 	if (arg === 'const CharInfo') {return 'CharInfo'}
 	// Camera2D arguments are already in JSON 
@@ -98,13 +98,13 @@ function argumentTypeConversion(arg: string) {
 	if (arg === 'rAudioBuffer *') {return 'any'}
 
 	if (arg === 'Color *') {return 'number'}
-	
+
 	// fallback (mostly for Raylib struct types or void)
 	arg = arg.replace('const ', '')
 	if (arg.includes('*')) {
-		if (arg === 'Transform **') {return 'Transform[]'}
-		if (arg === 'Rectangle **') {return 'Rectangle[]'}
-		if (arg === 'ModelAnimation*') {return 'ModelAnimation[]'}
+		if (arg === 'Transform **') {return 'number'}
+		if (arg === 'Rectangle **') {return 'number'}
+		if (arg === 'ModelAnimation*') {return 'number'}
 		
 		return (arg.slice(0, arg.length-2))
 	}

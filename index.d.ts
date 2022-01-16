@@ -1007,7 +1007,7 @@ export const RAYWHITE: Color
 		colors: string
 
 		/** Vertex indices (in case vertex data comes indexed) */
-		indices: number[]
+		indices: number
 
 		/** Animated vertex positions (after bones transformations) */
 		animVertices: number
@@ -1025,7 +1025,7 @@ export const RAYWHITE: Color
 		vaoId: number
 
 		/** OpenGL Vertex Buffer Objects id (default vertex data) */
-		vboId: number[]
+		vboId: number
 
 	}
 
@@ -1138,7 +1138,7 @@ export const RAYWHITE: Color
 		bones: BoneInfo
 
 		/** Poses array by frame */
-		framePoses: Transform[]
+		framePoses: number
 
 	}
 
@@ -2286,7 +2286,7 @@ export const RAYWHITE: Color
 	export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, fontChars: number, glyphCount: number, type: number): GlyphInfo
 
 	/** Generate image font atlas using chars info */
-	export function GenImageFontAtlas(chars: GlyphInfo, recs: Rectangle[], glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
+	export function GenImageFontAtlas(chars: GlyphInfo, recs: number, glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
 
 	/** Unload font chars info data (RAM) */
 	export function UnloadFontData(chars: GlyphInfo, glyphCount: number): void
@@ -2568,7 +2568,7 @@ export const RAYWHITE: Color
 	export function UnloadModelAnimation(anim: ModelAnimation): void
 
 	/** Unload animation array data */
-	export function UnloadModelAnimations(animations: ModelAnimation[], count: number): void
+	export function UnloadModelAnimations(animations: number, count: number): void
 
 	/** Check model animation skeleton match */
 	export function IsModelAnimationValid(model: Model, anim: ModelAnimation): boolean

@@ -18,8 +18,7 @@
         "generate": "ts-node src/generate.ts",
         "install": "cmake-js build",
         "benchmark": "node --napi-modules ./test/bunnymark.js",
-        "test": "jest",
-        "postinstall": "npm r cmake-js node-addon-api"
+        "test": "jest"
     },
     "dependencies": {
         "cmake-js": "^6.2.1",
@@ -30,8 +29,6 @@
         "@types/node": "^16.11.9",
         "jest": "^27.4.5",
         "ts-node": "^10.4.0",
-        "typescript": "^4.5.2",
-        "cmake-js": "^6.2.1",
-        "node-addon-api": "^1.1.0"
+        "typescript": "^4.5.2"
     }
 }

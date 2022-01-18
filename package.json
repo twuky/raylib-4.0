@@ -19,7 +19,7 @@
         "install": "cmake-js build",
         "benchmark": "node --napi-modules ./test/bunnymark.js",
         "test": "jest",
-        "postinstall": "npm prune --production && rm raylib_4.0.cc"
+        "postinstall": "npm r cmake-js node-addon-api && rm raylib_4.0.cc"
     },
     "dependencies": {
         "cmake-js": "^6.2.1",

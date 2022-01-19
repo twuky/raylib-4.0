@@ -445,4 +445,4 @@ raylib.NPatchLayout = {
     NPATCH_THREE_PATCH_HORIZONTAL: 2,
 }
 
-module.exports = raylib;
+module.exports = {...raylib};

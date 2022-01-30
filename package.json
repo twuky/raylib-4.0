@@ -4,6 +4,7 @@
     "author": "tuckie",
     "license": "ISC",
     "description": "NodeJS Bindings for the raylib graphics library.",
+    "type": "commonjs",
     "main": "index.js",
     "types": "index.d.ts",
     "repository": "https://github.com/twuky/raylib-4.0",
@@ -21,6 +22,7 @@
         "test": "jest"
     },
     "dependencies": {
+        "bindings": "^1.5.0",
         "cmake-js": "^6.2.1",
         "node-addon-api": "^1.1.0"
     },

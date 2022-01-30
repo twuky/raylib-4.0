@@ -1,4 +1,4 @@
-var raylib = require('./build/Release/raylib-4.0');
+var raylib = require('bindings')('raylib-4.0')
 
 let wrapped = [
     'UpdateCamera',
@@ -445,4 +445,6 @@ raylib.NPatchLayout = {
     NPATCH_THREE_PATCH_HORIZONTAL: 2,
 }
 
-module.exports = {...raylib};
+module.exports = {...raylib}
+
+exports.raylib = raylib
